@@ -69,6 +69,11 @@ class Ticket(models.Model):
     def __str__(self):
         return f"#{self.id} - {self.subject}"
     
+    def save(self, *args, **kwargs):
+        if not self.assigned_to and self.category:
+            self.assigned_to = self.category.default_assignee
+        super().save(*args, **kwargs)
+    
 
 class Comment(models.Model):
     ticket = models.ForeignKey(
