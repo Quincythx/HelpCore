@@ -1,0 +1,1420 @@
+{
+  "info": {
+    "_postman_id": "482b4ae4-19f9-43c2-a2d2-cca974796154",
+    "name": "HelpCore API",
+    "description": "Internal IT support ticketing API built with Django REST Framework.  \nEmployees submit tickets, which are automatically routed to the correct  \nIT staff member based on category. Role-based access ensures Employees,  \nIT Staff, and Admins each see only what's relevant to them.\n\nAuth: Basic Auth (temporary — will be replaced with JWT).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44807174",
+    "_collection_link": "https://go.postman.co/collection/44807174-482b4ae4-19f9-43c2-a2d2-cca974796154?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth & Users",
+      "item": []
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/categories/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List Categories",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/categories/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:20:29 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "152"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"name\": \"Network\",\n            \"default_assignee\": 2\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Password Reset\",\n            \"default_assignee\": 2\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Password Reset\",\r\n    \"default_assignee\": \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/categories/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Category",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Password Reset - testing\",\r\n    \"default_assignee\": 2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/categories/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "categories",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:28:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "63"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 3,\n    \"name\": \"Password Reset - testing\",\n    \"default_assignee\": 2\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Manage ticket categories. Viewable by all authenticated users; create/edit/delete restricted to Admins."
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "List Tickets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List Tickets",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 12:14:51 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1235"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 2,\n            \"employee\": 1,\n            \"employee_id_display\": \"ADMIN001\",\n            \"assigned_to\": 2,\n            \"assigned_to_display\": \"IT001\",\n            \"category\": 1,\n            \"category_name\": \"Network\",\n            \"subject\": \"Cannot connect to VPN\",\n            \"description\": \"VPN client fails to connect since this morning.\",\n            \"department\": \"sales\",\n            \"priority\": \"high\",\n            \"status\": \"open\",\n            \"created_at\": \"2026-07-21T14:53:24.035408Z\",\n            \"updated_at\": \"2026-07-21T14:53:24.035444Z\",\n            \"comments\": [],\n            \"attachments\": []\n        },\n        {\n            \"id\": 1,\n            \"employee\": 1,\n            \"employee_id_display\": \"ADMIN001\",\n            \"assigned_to\": 2,\n            \"assigned_to_display\": \"IT001\",\n            \"category\": 1,\n            \"category_name\": \"Network\",\n            \"subject\": \"Test ticket\",\n            \"description\": \"Just testing the Comment serializer\",\n            \"department\": \"it\",\n            \"priority\": \"medium\",\n            \"status\": \"accepted\",\n            \"created_at\": \"2026-07-21T11:05:07.989234Z\",\n            \"updated_at\": \"2026-07-21T15:10:34.636788Z\",\n            \"comments\": [\n                {\n                    \"id\": 1,\n                    \"ticket\": 1,\n                    \"author\": 1,\n                    \"message\": \"This is a test comment.\",\n                    \"created_at\": \"2026-07-21T11:06:16.384039Z\"\n                },\n                {\n                    \"id\": 2,\n                    \"ticket\": 1,\n                    \"author\": 1,\n                    \"message\": \"Have you tried restarting your router?\",\n                    \"created_at\": \"2026-07-21T15:19:50.504796Z\"\n                }\n            ],\n            \"attachments\": [\n                {\n                    \"id\": 1,\n                    \"ticket\": 1,\n                    \"file\": \"http://127.0.0.1:8000/media/ticket_attachments/1/3585864.jpg\",\n                    \"uploaded_by\": 1,\n                    \"uploaded_at\": \"2026-07-28T10:31:32.361251Z\"\n                }\n            ]\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Ticket",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"category\": 1,\r\n    \"subject\": \"Cannot connect to VPN\",\r\n    \"description\": \"VPN client fails to connect since this morning.\",\r\n    \"department\": \"sales\",\r\n    \"priority\": \"high\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Ticket",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category\": 1,\r\n    \"subject\": \"test 2\",\r\n    \"description\": \"test 2\",\r\n    \"department\": \"sales\",\r\n    \"priority\": \"high\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:23:08 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "353"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 3,\n    \"employee\": 1,\n    \"employee_id_display\": \"ADMIN001\",\n    \"assigned_to\": 2,\n    \"assigned_to_display\": \"IT001\",\n    \"category\": 1,\n    \"category_name\": \"Network\",\n    \"subject\": \"test 2\",\n    \"description\": \"test 2\",\n    \"department\": \"sales\",\n    \"priority\": \"high\",\n    \"status\": \"open\",\n    \"created_at\": \"2026-07-28T13:23:08.321145Z\",\n    \"updated_at\": \"2026-07-28T13:23:08.321157Z\",\n    \"comments\": [],\n    \"attachments\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "Retrieve Ticket",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Retrieve Ticket",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/1/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:23:25 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "773"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"employee\": 1,\n    \"employee_id_display\": \"ADMIN001\",\n    \"assigned_to\": 2,\n    \"assigned_to_display\": \"IT001\",\n    \"category\": 1,\n    \"category_name\": \"Network\",\n    \"subject\": \"Test ticket\",\n    \"description\": \"Just testing the Comment serializer\",\n    \"department\": \"it\",\n    \"priority\": \"medium\",\n    \"status\": \"accepted\",\n    \"created_at\": \"2026-07-21T11:05:07.989234Z\",\n    \"updated_at\": \"2026-07-21T15:10:34.636788Z\",\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"ticket\": 1,\n            \"author\": 1,\n            \"message\": \"This is a test comment.\",\n            \"created_at\": \"2026-07-21T11:06:16.384039Z\"\n        },\n        {\n            \"id\": 2,\n            \"ticket\": 1,\n            \"author\": 1,\n            \"message\": \"Have you tried restarting your router?\",\n            \"created_at\": \"2026-07-21T15:19:50.504796Z\"\n        }\n    ],\n    \"attachments\": [\n        {\n            \"id\": 1,\n            \"ticket\": 1,\n            \"file\": \"http://127.0.0.1:8000/media/ticket_attachments/1/3585864.jpg\",\n            \"uploaded_by\": 1,\n            \"uploaded_at\": \"2026-07-28T10:31:32.361251Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Ticket Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"accepted\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/1/update_status/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                "1",
+                "update_status",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Ticket Status",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\": \"accepted\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/1/update_status/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "1",
+                    "update_status",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:23:45 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "PATCH, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "752"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"employee\": 1,\n    \"employee_id_display\": \"ADMIN001\",\n    \"assigned_to\": 2,\n    \"assigned_to_display\": \"IT001\",\n    \"category\": 1,\n    \"category_name\": \"Network\",\n    \"subject\": \"Test ticket\",\n    \"description\": \"Just testing the Comment serializer\",\n    \"department\": \"it\",\n    \"priority\": \"medium\",\n    \"status\": \"accepted\",\n    \"created_at\": \"2026-07-21T11:05:07.989234Z\",\n    \"updated_at\": \"2026-07-28T13:23:45.168921Z\",\n    \"comments\": [\n        {\n            \"id\": 1,\n            \"ticket\": 1,\n            \"author\": 1,\n            \"message\": \"This is a test comment.\",\n            \"created_at\": \"2026-07-21T11:06:16.384039Z\"\n        },\n        {\n            \"id\": 2,\n            \"ticket\": 1,\n            \"author\": 1,\n            \"message\": \"Have you tried restarting your router?\",\n            \"created_at\": \"2026-07-21T15:19:50.504796Z\"\n        }\n    ],\n    \"attachments\": [\n        {\n            \"id\": 1,\n            \"ticket\": 1,\n            \"file\": \"/media/ticket_attachments/1/3585864.jpg\",\n            \"uploaded_by\": 1,\n            \"uploaded_at\": \"2026-07-28T10:31:32.361251Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Filter Tickets by Status (accepted)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/?status=accepted",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "accepted"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Filter Tickets by Status (accepted)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/?status=accepted",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "accepted"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 12:04:19 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "775"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 1,\n        \"employee\": 1,\n        \"employee_id_display\": \"ADMIN001\",\n        \"assigned_to\": 2,\n        \"assigned_to_display\": \"IT001\",\n        \"category\": 1,\n        \"category_name\": \"Network\",\n        \"subject\": \"Test ticket\",\n        \"description\": \"Just testing the Comment serializer\",\n        \"department\": \"it\",\n        \"priority\": \"medium\",\n        \"status\": \"accepted\",\n        \"created_at\": \"2026-07-21T11:05:07.989234Z\",\n        \"updated_at\": \"2026-07-21T15:10:34.636788Z\",\n        \"comments\": [\n            {\n                \"id\": 1,\n                \"ticket\": 1,\n                \"author\": 1,\n                \"message\": \"This is a test comment.\",\n                \"created_at\": \"2026-07-21T11:06:16.384039Z\"\n            },\n            {\n                \"id\": 2,\n                \"ticket\": 1,\n                \"author\": 1,\n                \"message\": \"Have you tried restarting your router?\",\n                \"created_at\": \"2026-07-21T15:19:50.504796Z\"\n            }\n        ],\n        \"attachments\": [\n            {\n                \"id\": 1,\n                \"ticket\": 1,\n                \"file\": \"http://127.0.0.1:8000/media/ticket_attachments/1/3585864.jpg\",\n                \"uploaded_by\": 1,\n                \"uploaded_at\": \"2026-07-28T10:31:32.361251Z\"\n            }\n        ]\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Filter Tickets by Status (resolved)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/?status=resolved",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "resolved"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Filter Tickets by Status (resolved)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/?status=resolved",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "resolved"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 12:07:02 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[]"
+            }
+          ]
+        },
+        {
+          "name": "Overdue Tickets (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/overdue/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                "overdue",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Overdue Tickets (Admin)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/overdue/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "overdue",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 12:55:24 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "411"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 2,\n        \"employee\": 1,\n        \"employee_id_display\": \"ADMIN001\",\n        \"assigned_to\": 2,\n        \"assigned_to_display\": \"IT001\",\n        \"category\": 1,\n        \"category_name\": \"Network\",\n        \"subject\": \"Cannot connect to VPN\",\n        \"description\": \"VPN client fails to connect since this morning.\",\n        \"department\": \"sales\",\n        \"priority\": \"high\",\n        \"status\": \"open\",\n        \"created_at\": \"2026-07-21T14:53:24.035408Z\",\n        \"updated_at\": \"2026-07-21T14:53:24.035444Z\",\n        \"comments\": [],\n        \"attachments\": []\n    }\n]"
+            }
+          ]
+        }
+      ],
+      "description": "Core ticket lifecycle: create, retrieve, filter by status, update status with role-based guardrails, and view overdue tickets (Admin only)."
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Create Comment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\": \"Have you tried restarting your router?\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/1/comments/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                "1",
+                "comments",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Comment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"message\": \"Test Comment 1\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/1/comments/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "1",
+                    "comments",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:24:46 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "102"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 3,\n    \"ticket\": \"1\",\n    \"author\": 1,\n    \"message\": \"Test Comment 1\",\n    \"created_at\": \"2026-07-28T13:24:46.675608Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "List Comments",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "List Comments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/1/comments/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "1",
+                    "comments",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:12:02 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "286"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"ticket\": 1,\n            \"author\": 1,\n            \"message\": \"This is a test comment.\",\n            \"created_at\": \"2026-07-21T11:06:16.384039Z\"\n        },\n        {\n            \"id\": 2,\n            \"ticket\": 1,\n            \"author\": 1,\n            \"message\": \"Have you tried restarting your router?\",\n            \"created_at\": \"2026-07-21T15:19:50.504796Z\"\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Threaded messages on a specific ticket."
+    },
+    {
+      "name": "Attachments",
+      "item": [
+        {
+          "name": "Create Attachment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "c8d4b9ad-13f5-4735-957c-4f18d3568d62",
+                  "src": "/C:/Users/quinc/OneDrive/Pictures/DARK AESTHETICS/3585864.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tickets/1/attachments/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tickets",
+                "1",
+                "attachments",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Attachment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "uuid": "c8d4b9ad-13f5-4735-957c-4f18d3568d62",
+                      "src": "/C:/Users/quinc/OneDrive/Pictures/DARK AESTHETICS/3585864.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/1/attachments/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "1",
+                    "attachments",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 10:31:32 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "151"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"ticket\": \"1\",\n    \"file\": \"http://127.0.0.1:8000/media/ticket_attachments/1/3585864.jpg\",\n    \"uploaded_by\": 1,\n    \"uploaded_at\": \"2026-07-28T10:31:32.361251Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "List Attachments",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "List Attachments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/tickets/1/attachments/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "tickets",
+                    "1",
+                    "attachments",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 28 Jul 2026 13:13:47 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.14.5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept, Cookie"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "201"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"ticket\": 1,\n            \"file\": \"http://127.0.0.1:8000/media/ticket_attachments/1/3585864.jpg\",\n            \"uploaded_by\": 1,\n            \"uploaded_at\": \"2026-07-28T10:31:32.361251Z\"\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ],
+      "description": "File uploads (max 5MB, restricted types) attached to a specific ticket."
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "quincy150",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "ADMIN001",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
