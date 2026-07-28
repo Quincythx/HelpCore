@@ -12,14 +12,14 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ["id", "ticket", "author", "message", "created_at"]
-        read_only_fields = ["author", "created_at"]
+        read_only_fields = ["ticket", "author", "created_at"]
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attachment
         fields = ["id", "ticket", "file", "uploaded_by", "uploaded_at"]
-        read_only_fields = ["uploaded_by", "uploaded_at"]
+        read_only_fields = ["ticket", "uploaded_by", "uploaded_at"]
 
 
 
