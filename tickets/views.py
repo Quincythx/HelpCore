@@ -5,6 +5,9 @@ from .permissions import IsAuthenticated, IsAdmin, CanAccessTicket
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from django.utils import timezone
+from datetime import timedelta
+
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -66,6 +69,19 @@ class TicketViewSet(viewsets.ModelViewSet):
         ticket.status = new_status
         ticket.save()
         return Response(TicketSerializer(ticket).data)
+
+
+    @action(detail=False, methods=["get"], permission_classes=[IsAdmin])
+    def overdue(self, request):
+        overdue_minutes = 10
+        cutoff_time = timezone.now() - timedelta(minutes=overdue_minutes)
+
+        overdue_tickets = Ticket.objects.filter(
+            status=Ticket.Status.OPEN,
+            created_at__lt=cutoff_time,
+        )
+        serializer = TicketSerializer(overdue_tickets, many=True)
+        return Response(serializer.data)
 
 
 class CommentViewSet(viewsets.ModelViewSet):
