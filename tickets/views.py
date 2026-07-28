@@ -24,13 +24,19 @@ class TicketViewSet(viewsets.ModelViewSet):
         user = self.request.user
 
         if user.role == user.Role.EMPLOYEE:
-            return Ticket.objects.filter(employee=user)
+            queryset = Ticket.objects.filter(employee=user)
         elif user.role == user.Role.IT_STAFF:
-            return Ticket.objects.filter(assigned_to=user)
+            queryset = Ticket.objects.filter(assigned_to=user)
         elif user.role == user.Role.ADMIN:
-            return Ticket.objects.all()
+            queryset = Ticket.objects.all()
+        else:
+            queryset = Ticket.objects.none()
 
-        return Ticket.objects.none()
+        status_param = self.request.query_params.get("status")
+        if status_param:
+            queryset = queryset.filter(status=status_param)
+
+        return queryset
     
     def perform_create(self, serializer):
         serializer.save(employee=self.request.user)
