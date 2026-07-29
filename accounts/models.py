@@ -1,6 +1,11 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
+import uuid
+from django.utils import timezone
+from datetime import timedelta
+
+
 
 class UserManager(BaseUserManager):
     def create_user(self, employee_id, password=None, **extra_fields):
@@ -44,11 +49,31 @@ class User(AbstractUser):
         choices=Department.choices,
         default=Department.IT,
     )
+    email = models.EmailField(unique=True)
+    is_email_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = "employee_id"
     REQUIRED_FIELDS = []
 
     objects = UserManager()
 
+    def save(self, *args, **kwargs):
+        if not self.employee_id:
+            last_user = User.objects.order_by('-id').first()
+            next_number = (last_user.id + 1) if last_user else 1
+            self.employee_id = f"EMP{next_number:04d}"
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.employee_id} ({self.get_role_display()})"
+
+
+
+class EmailVerificationToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="verification_token")
+    token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def is_valid(self):
+        expiry_time = self.created_at + timedelta(hours=2)
+        return timezone.now() < expiry_time
