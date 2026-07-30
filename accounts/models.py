@@ -4,6 +4,7 @@ from django.db import models
 import uuid
 from django.utils import timezone
 from datetime import timedelta
+import random
 
 
 
@@ -77,3 +78,17 @@ class EmailVerificationToken(models.Model):
     def is_valid(self):
         expiry_time = self.created_at + timedelta(hours=2)
         return timezone.now() < expiry_time
+
+class LoginOTP(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="login_otps")
+    code = models.CharField(max_length=5)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
+
+    def is_valid(self):
+        expiry_time = self.created_at + timedelta(minutes=10)
+        return timezone.now() < expiry_time and not self.is_used
+
+    @staticmethod
+    def generate_code():
+        return str(random.randint(10000, 99999))

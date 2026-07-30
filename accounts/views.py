@@ -9,6 +9,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import LoginOTP
+
 
 
 class IsAdminUser(permissions.BasePermission):
@@ -68,3 +72,61 @@ class VerifyEmailView(APIView):
         verification.delete()
 
         return Response({"message": "Email verified successfully. You can now log in."})
+
+
+
+class LoginView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        employee_id = request.data.get("employee_id")
+        password = request.data.get("password")
+
+        user = authenticate(request, username=employee_id, password=password)
+
+        if user is None:
+            return Response({"error": "Invalid employee ID or password."}, status=401)
+
+        if not user.is_email_verified:
+            return Response({"error": "Please verify your email before logging in."}, status=403)
+
+        code = LoginOTP.generate_code()
+        LoginOTP.objects.create(user=user, code=code)
+
+        send_mail(
+            "Your HelpCore Login Code",
+            f"Hi {user.first_name or user.employee_id},\n\nYour login verification code is: {code}\n\nThis code expires in 10 minutes.",
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email],
+        )
+
+        return Response({"message": "A verification code has been sent to your email."})
+
+
+
+class VerifyOTPView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        employee_id = request.data.get("employee_id")
+        code = request.data.get("code")
+
+        try:
+            user = User.objects.get(employee_id=employee_id)
+        except User.DoesNotExist:
+            return Response({"error": "Invalid employee ID."}, status=400)
+
+        otp = LoginOTP.objects.filter(user=user, code=code).order_by("-created_at").first()
+
+        if otp is None or not otp.is_valid():
+            return Response({"error": "Invalid or expired code."}, status=400)
+
+        otp.is_used = True
+        otp.save()
+
+        refresh = RefreshToken.for_user(user)
+
+        return Response({
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
+        })
