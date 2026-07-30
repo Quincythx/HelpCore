@@ -26,7 +26,7 @@ urlpatterns = [
     path('api/', include('tickets.urls')),
     path('api/', include('accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:
