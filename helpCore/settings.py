@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_nested',
+    'drf_spectacular',
     'accounts',
     'tickets',
 ]
@@ -133,11 +134,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'HelpCore API',
+    'DESCRIPTION': 'Internal IT support ticketing API with role-based access, automatic ticket routing, and 2FA authentication.',
+    'VERSION': '1.0.0',
 }
 
 
