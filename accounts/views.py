@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions
-from django.core.mail import send_mail
+from .email_utils import send_email
 from django.conf import settings
 from django.db import transaction
 from .models import User, EmailVerificationToken
@@ -49,12 +49,7 @@ class RegisterUserView(generics.CreateAPIView):
                 f"The HelpCore Team"
             )
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [user.email],
-            )
+            send_email(subject, message, user.email)
 
 
 class VerifyEmailView(APIView):
@@ -93,11 +88,10 @@ class LoginView(APIView):
         code = LoginOTP.generate_code()
         LoginOTP.objects.create(user=user, code=code)
 
-        send_mail(
+        send_email(
             "Your HelpCore Login Code",
             f"Hi {user.first_name or user.employee_id},\n\nYour login verification code is: {code}\n\nThis code expires in 10 minutes.",
-            settings.DEFAULT_FROM_EMAIL,
-            [user.email],
+            user.email,
         )
 
         return Response({"message": "A verification code has been sent to your email."})
